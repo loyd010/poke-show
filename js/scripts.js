@@ -1,5 +1,6 @@
-//This code creates an array with pokemon names and characteristics
-let pokemonList = [
+//Wrapped the pokemonList array in IIFE
+let pokemonRepository = (function(){
+  let pokemonList = [
   {name: 'Jigglypuff', height: 2, type: ['normal','fairy']},
   {name: 'Squirtle', height: 2, type: 'water'},
   {name: 'Dugtrio', height: 2, type: 'ground'},
@@ -7,20 +8,25 @@ let pokemonList = [
   {name: 'Ivysaur', height: 3, type: ['grass','poison']}
 ];
 
-//This forEach() function is replacing the previously used for loop
-pokemonList.forEach(function(pokemon){
+  function add(pokemon) {
+    pokemonList.push(pokemon);
+  }
+
+  function getAll() {
+    return pokemonList;
+  }
+
+  return {
+    add: add,
+    getAll: getAll
+  }
+})();
+
+//This forEach() function is replacing the previously used for loop; also updated to refer to IIFE getAll function
+pokemonRepository.getAll().forEach(function(pokemon){
   if(pokemon.height>3){
     document.write(pokemon.name + ' (' + 'height: ' + pokemon.height + '\'' + ')' + ' - Wow, that\'s big!' + '<br>');
   }else{
     document.write(pokemon.name + ' (' + 'height: ' + pokemon.height + '\'' + ')' + '<br>');
   }
 });
-
-/*This code is being replaced with forEach() function
-for (let i=0; i<pokemonList.length; i++){
-  if (pokemonList[i].height>3){
-    document.write(pokemonList[i].name + ' (' + 'height: ' + pokemonList[i].height + '\'' + ')' + ' - Wow, that\'s big!' + '<br>');
-  } else {
-  document.write(pokemonList[i].name + ' (' + 'height: ' + pokemonList[i].height + '\'' + ')' + '<br>');
-  }
-}*/
