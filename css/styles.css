@@ -12,3 +12,16 @@
     color: darkslateblue;
     font-weight: 700;
   }
+
+  .pokemon-list {
+    list-style-type: none;
+  }
+
+  button {
+    height: 30px;
+    width: 130px;
+    color: darkslateblue;
+    background-color: yellow;
+    padding: 30px 30px;
+    margin: 10px;
+  }

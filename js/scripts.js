@@ -24,9 +24,10 @@ let pokemonRepository = (function(){
 
 //This forEach() function is replacing the previously used for loop; also updated to refer to IIFE getAll function
 pokemonRepository.getAll().forEach(function(pokemon){
-  if(pokemon.height>3){
-    document.write(pokemon.name + ' (' + 'height: ' + pokemon.height + '\'' + ')' + ' - Wow, that\'s big!' + '<br>');
-  }else{
-    document.write(pokemon.name + ' (' + 'height: ' + pokemon.height + '\'' + ')' + '<br>');
-  }
+  let newPokemonList = document.querySelector('ul');
+  let listItem = document.createElement('li');
+  let button = document.createElement('button');
+  button.innerText = pokemon.name;
+  button.classList.add('newStyle');
+  listItem.appendChild(button);      newPokemonList.appendChild(listItem);
 });
