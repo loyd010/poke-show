@@ -18,16 +18,29 @@ let pokemonRepository = (function(){
 
   return {
     add: add,
-    getAll: getAll
+    getAll: getAll,
+    addListItem: addListItem
+  }
+
+
+    function showDetails(pokemon){
+      console.log(pokemon);
+    }
+
+//addListItem added and function inside forEach changed to create buttons for each pokemon
+
+    function addListItem(pokemon){
+    let newPokemonList = document.querySelector('ul');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('newStyle');
+    listItem.appendChild(button);
+    newPokemonList.appendChild(listItem);
   }
 })();
 
 //This forEach() function is replacing the previously used for loop; also updated to refer to IIFE getAll function
 pokemonRepository.getAll().forEach(function(pokemon){
-  let newPokemonList = document.querySelector('ul');
-  let listItem = document.createElement('li');
-  let button = document.createElement('button');
-  button.innerText = pokemon.name;
-  button.classList.add('newStyle');
-  listItem.appendChild(button);      newPokemonList.appendChild(listItem);
+  pokemonRepository.addListItem(pokemon);
 });
