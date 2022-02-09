@@ -22,12 +22,7 @@ let pokemonRepository = (function(){
     addListItem: addListItem
   }
 
-
-    function showDetails(pokemon){
-      console.log(pokemon);
-    }
-
-//addListItem added and function inside forEach changed to create buttons for each pokemon
+//addListItem added and function inside forEach changed to create buttons for each pokemon; event listener added for button clicks
 
     function addListItem(pokemon){
     let newPokemonList = document.querySelector('ul');
@@ -37,8 +32,16 @@ let pokemonRepository = (function(){
     button.classList.add('newStyle');
     listItem.appendChild(button);
     newPokemonList.appendChild(listItem);
+    button.addEventListener('click', showDetails);
   }
 })();
+
+//Adam - this is the spot where I am having trouble.  This function calls details for the pokemon object passed as the parameter
+    function showDetails(pokemon){
+      pokemonRepository.getAll(pokemon.name).forEach(function(pokemon){
+            console.log(pokemon.name);
+      });
+    }
 
 //This forEach() function is replacing the previously used for loop; also updated to refer to IIFE getAll function
 pokemonRepository.getAll().forEach(function(pokemon){
