@@ -36,12 +36,13 @@ let pokemonRepository = (function(){
         showDetails(pokemon);
       });
   }
+
+  function showDetails(pokemon){
+    console.log(pokemon.name);
+  }
 })();
 
-//Adam - this is the spot where I am having trouble.  This function calls details for the pokemon object passed as the parameter
-    function showDetails(pokemon){
-      console.log(pokemon.name);
-    }
+
 
 //This forEach() function is replacing the previously used for loop; also updated to refer to IIFE getAll function
 pokemonRepository.getAll().forEach(function(pokemon){
