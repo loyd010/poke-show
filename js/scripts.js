@@ -1,12 +1,9 @@
 //Wrapped the pokemonList array in IIFE
 let pokemonRepository = (function(){
-  let pokemonList = [
-  {name: 'Jigglypuff', height: 2, type: ['normal','fairy']},
-  {name: 'Squirtle', height: 2, type: 'water'},
-  {name: 'Dugtrio', height: 2, type: 'ground'},
-  {name: 'Butterfree', height: 4, type: ['bug','flying']},
-  {name: 'Ivysaur', height: 3, type: ['grass','poison']}
-];
+  let pokemonList = [];
+
+//Added link to API for pokemon data
+  let apiURL = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   function add(pokemon) {
     pokemonList.push(pokemon);
@@ -14,12 +11,6 @@ let pokemonRepository = (function(){
 
   function getAll() {
     return pokemonList;
-  }
-
-  return {
-    add: add,
-    getAll: getAll,
-    addListItem: addListItem
   }
 
 //addListItem added and function inside forEach changed to create buttons for each pokemon; event listener added for button clicks
@@ -37,14 +28,56 @@ let pokemonRepository = (function(){
       });
   }
 
+//updated showDetails function to show details retrieved via API
   function showDetails(pokemon){
-    console.log(pokemon.name);
+    loadDetails(pokemon).then(function (){
+    console.log(pokemon);
+    });
   }
+
+//added loadList and loadDetails functions to pokemon repository
+
+  function loadList(){
+    return fetch(apiURL).then(function (response){
+      return response.json();
+    }).then(function (json){
+      json.results.forEach(function (item){
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch(function (e){
+      console.error(e);
+    })
+  }
+
+  function loadDetails(item){
+    let url = item.detailsUrl;
+    return fetch(url).then(function (response){
+      return response.json();
+    }).then(function (details){
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = details.types;
+    }).catch(function (e){
+      console.error(e);
+    });
+  }
+
+  return {
+    add: add,
+    getAll: getAll,
+    addListItem: addListItem,
+    loadList: loadList,
+    loadDetails: loadDetails,
+    showDetails: showDetails
+  };
 })();
 
-
-
-//This forEach() function is replacing the previously used for loop; also updated to refer to IIFE getAll function
-pokemonRepository.getAll().forEach(function(pokemon){
-  pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function(){
+  pokemonRepository.getAll().forEach(function(pokemon){
+    pokemonRepository.addListItem(pokemon);
+  });
 });
