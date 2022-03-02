@@ -16,7 +16,7 @@ let pokemonRepository = (function(){
 //addListItem added and function inside forEach changed to create buttons for each pokemon; event listener added for button clicks
 
     function addListItem(pokemon){
-      let newPokemonList = document.querySelector('ul');
+      let newPokemonList = document.querySelector('.pokemon-list');
       let listItem = document.createElement('li');
       let button = document.createElement('button');
       listItem.classList.add('list-group-item');
@@ -68,8 +68,7 @@ let pokemonRepository = (function(){
       item.types = [];
       details.types.forEach(function(element){
         item.types.push(element.type.name);
-      })
-      item.abilities = [];
+      });
     }).catch(function (e){
       console.error(e);
     });
@@ -94,9 +93,7 @@ let pokemonRepository = (function(){
 
   	let weightElement = $("<p>" + "weight : " + pokemon.weight + "</p>");
 
-  	let typesElement = $("<p>" + "types : " + pokemon.types + "</p>");
-
-  	let abilitiesElement = $("<p>" + "abilities : " + pokemon.abilities + "</p>");
+  	let typesElement = $("<p>" + "type\(s\) : " + pokemon.types + " </p>");
 
   	modalTitle.append(nameElement);
   	modalBody.append(imageElementFront);
@@ -104,7 +101,6 @@ let pokemonRepository = (function(){
   	modalBody.append(heightElement);
   	modalBody.append(weightElement);
   	modalBody.append(typesElement);
-  	modalBody.append(abilitiesElement);
   }
 
 /*added functions to show and hide modal
