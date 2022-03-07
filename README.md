@@ -1,0 +1,1 @@
+This application retrieves information via an API (https://pokeapi.co/api/v2/pokemon/?limit=150) to display details about different pokemon via modals that are displayed when a user clicks on specific buttons.  Languages used include JavaScript, HTML, and CSS, as well as the employ of external libraries Bootstrap and jQuery.    
