@@ -13,3 +13,8 @@ button {
   font-weight: 700;
   color: black;
 }
+
+.list-group-item {
+  border: none;
+  background-color: none;
+}
