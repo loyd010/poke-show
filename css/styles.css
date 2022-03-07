@@ -18,3 +18,7 @@ button {
   border: none;
   background-color: none;
 }
+
+.mail-button {
+  margin: 20px;
+}
